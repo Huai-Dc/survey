@@ -6,10 +6,6 @@ import {delCookie, removeStorage} from "../utils/storageData";
 
 axios.interceptors.request.use(config => {    // 这里的config包含每次请求的内容
     // 判断localStorage中是否存在api_token
-    if (localStorage.getItem('api_token')) {
-        //  存在将api_token写入 request header
-        // config.headers.apiToken = `${localStorage.getItem('api_token')}`;
-    }
     return config;
 }, err => {
     return Promise.reject(err);
@@ -29,12 +25,6 @@ function checkStatus(response) {
     }
 
     if(response && (response.status === 500 || response.status === 401)){
-        // 清楚本地存储的token等信息
-        delCookie('User-Token');
-        removeStorage('User-Info');
-        removeStorage('api_token');
-        // 说明 token 验证失败
-        // 可以直接跳转到登录页面，重新登录获取 token
         location.href = '/';
     }
     // 异常状态下，把错误信息返回去
@@ -94,16 +84,4 @@ export default {
             }
         )
     },
-    postImage(url, params) {
-        return axios.post(url, params, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then(res => {
-            return checkStatus(res)
-        }).then((res) => {
-                return checkCode(res)
-            }
-        )
-    }
 }

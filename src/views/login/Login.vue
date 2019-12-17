@@ -1,14 +1,14 @@
 <template>
     <div class="login-container">
         <div class="login-background">
-            <img src="../../assets/background/background_glass.jpg"/>
+            <img src="../../assets/background.jpg"/>
         </div>
         <div class="login-content">
             <!-- LOGO -->
             <van-row type="flex" class="logo" justify="center">
-                <van-col span="8"><img src="../../assets/logo.png"/></van-col>
+                <van-col span="8">问卷调查</van-col>
             </van-row>
-            <!-- 登录表单 -->
+            <!-- 登录表单1 -->
             <div class="form-content">
                 <van-row class="user" type="flex" justify="center">
                     <van-col span="3" class="iconBar">
@@ -26,11 +26,6 @@
                         <van-field v-model="loginForm.password" type="password" placeholder="请输入密码"/>
                     </van-col>
                 </van-row>
-                <van-row type="flex" justify="center" class="remember-password">
-                    <van-col span="20">
-                        <van-checkbox v-model="checked">记住密码</van-checkbox>
-                    </van-col>
-                </van-row>
                 <van-row class="submit-button" type="flex" justify="center">
                     <van-col span="20">
                         <van-button type="primary" size="large" loading-text="登录中..." :loading="isLoading"
@@ -39,10 +34,6 @@
                     </van-col>
                 </van-row>
             </div>
-            <!-- 跳转注册 -->
-            <van-row class="gotoRegister" type="flex" justify="center">
-                <span href="#" @click="gotoRegister">没有帐号，立即注册</span>
-            </van-row>
         </div>
     </div>
 </template>
@@ -95,11 +86,7 @@
                     Toast.fail('登录名或密码不能为空！');
                 }
             },
-            gotoRegister() {
-                this.$router.push({
-                    path: '/register'
-                });
-            },
+
             rememberLoginInfo() {
                 if (this.checked) {
                     let cookieInfo = qs.stringify({
@@ -129,6 +116,8 @@
 <style lang="scss" scoped>
     .login-container {
         position: fixed;
+      top: 0;
+      left: 0;
         height: 100%;
         width: 100%;
 
@@ -146,9 +135,13 @@
         }
 
         .login-content {
-            .logo img {
+          margin-top: 200px;
+            .logo {
                 width: 100%;
-                margin: 5rem 0;
+                margin: 2rem 0;
+                font-size: 1.6rem;
+                color: white;
+                text-align: center;
             }
         }
 
@@ -169,8 +162,8 @@
             .submit-button {
                 .van-button--primary {
                     color: #fff;
-                    background-color: #CD3D39;
-                    border: 1px solid #CD3D39;
+                    background-color: #52a9ff;
+                    border: 1px solid #52a9ff;
                 }
             }
 
@@ -183,7 +176,7 @@
 
                 .van-icon {
                     font-size: 1.5rem;
-                    color: #CD3D39;
+                    color: #ffffff;
                 }
             }
 
